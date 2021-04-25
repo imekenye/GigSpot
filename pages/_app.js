@@ -1,5 +1,6 @@
 import { normalize } from "styled-normalize";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "@/styles/theme";
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -19,11 +20,20 @@ export const GlobalStyle = createGlobalStyle`
    font-weight: 500;
    font-display: block;
  }
+
+  @font-face {
+    font-family: "Everett";
+    src: url("/fonts/Everret/Everret-Light.ttf");
+    font-weight: 200;
+    font-display: block;
+  }
 body{
    padding: 0;
    margin: 0;
-   height: 100%;
+   height: 100vh;
+   color: white;
   font-family: Everett, sans-serif;
+  background: #000;
  }
  *,html,h1,h2,h3,h4,p{
    margin:0;
@@ -34,8 +44,10 @@ body{
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }
